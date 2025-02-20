@@ -268,7 +268,8 @@ setup(name='pyhash',
       ],
       keywords='hash hashing fasthash',
       setup_requires=list(filter(None, [
-          'cpuid' if IS_X86 else None,
+          'cpuid @ git+https://github.com/marcoffee/cpuid-py.git@4f92c6eb37920945ff7a3412712ebee1ccb13d81'
+          if IS_X86 else None,
           'pybind11',
       ])),
       tests_require=['pytest', 'pytest-runner', 'pytest-benchmark'],

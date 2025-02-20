@@ -56,7 +56,12 @@ public:
       return false;
     }
 
+#   if (PY_MAJOR_VERSION > 3) || ((PY_MAJOR_VERSION == 3) && (PY_MINOR_VERSION >= 13))
+    _PyLong_AsByteArray((PyLongObject *)n.ptr(), (unsigned char *)&value, sizeof(uint128_t), IS_LITTLE_ENDIAN, PyLong_Unsigned, 1);
+
+#   else
     _PyLong_AsByteArray((PyLongObject *)n.ptr(), (unsigned char *)&value, sizeof(uint128_t), IS_LITTLE_ENDIAN, PyLong_Unsigned);
+#   endif
 
     return !PyErr_Occurred();
   }
@@ -82,7 +87,12 @@ public:
       return false;
     }
 
+#   if (PY_MAJOR_VERSION > 3) || ((PY_MAJOR_VERSION == 3) && (PY_MINOR_VERSION >= 13))
+    _PyLong_AsByteArray((PyLongObject *)n.ptr(), (unsigned char *)&value, sizeof(uint256_t), IS_LITTLE_ENDIAN, PyLong_Unsigned, 1);
+
+#   else
     _PyLong_AsByteArray((PyLongObject *)n.ptr(), (unsigned char *)&value, sizeof(uint256_t), IS_LITTLE_ENDIAN, PyLong_Unsigned);
+#   endif
 
     return !PyErr_Occurred();
   }
